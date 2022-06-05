@@ -1,0 +1,21 @@
+require('dotenv').config();
+const {Diet} = require('../db');
+const axios = require('axios');
+const { API_KEY } = process.env;
+
+const preLoadDiets = async() => {
+    try {
+        const apiInfo = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=20`);
+        const apiDiets = apiInfo.data?.results.map(element => element.diets);
+        const repeatedDiets = apiDiets.flat();
+        const finalListOfDiets = [...new Set(repeatedDiets)];
+        const diets = finalListOfDiets.map(name => ({ name }));
+        await Diet.bulkCreate(diets);
+    } catch (e) {
+        console.log(e)
+    }
+};
+
+module.exports = {
+    preLoadDiets
+};
