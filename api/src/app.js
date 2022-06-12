@@ -1,9 +1,10 @@
-require('./db');
-const express =require('express');
+const express = require('express');
+const crossOriginRecourseSharing = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes');
+require('./db');
 
 const server = express();
 
@@ -21,6 +22,7 @@ server.use((req, res, next) => {
     next();
 });
 
+server.use(crossOriginRecourseSharing());
 server.use('/', routes);
 
 server.use((err, req, res, next) => {

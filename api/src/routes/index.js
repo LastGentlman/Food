@@ -6,6 +6,6 @@ const recipesRoute = require('./recipes');
 const typesDietRoute = require('./typesDiets');
 
 router.use('/recipes', recipesRoute);
-router.use('/types', typesDietRoute);
+router.use('/diets', typesDietRoute);
 
 module.exports = router;

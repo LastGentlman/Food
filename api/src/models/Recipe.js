@@ -8,11 +8,11 @@ module.exports = (sequelize) => {
             allowNull: false,
             primaryKey: true
         },
-        title: {
+        name: { // name of the recipe
             type: DataTypes.STRING,
             allowNull: false
         },
-        summary: {
+        summary: { // dish description
             type: DataTypes.STRING(1000),
             allowNull: false
         },
@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
                 max: 100
             }
         },
-        healthScore:{
+        healthScore:{ // health score
             type: DataTypes.FLOAT(1),
             allowNull: false,
             validate: {
@@ -31,11 +31,12 @@ module.exports = (sequelize) => {
                 max: 100
             }
         },
-        instructions: {
-            type:DataTypes.STRING
+        instructions: { // steps to make the dish
+            type: DataTypes.STRING
         },
         image:{
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         }
     });
 };

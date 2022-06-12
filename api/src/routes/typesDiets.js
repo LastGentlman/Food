@@ -5,7 +5,11 @@ const {Diet} = require('../db');
 router.get('/', async (req, res, next) => {
     try {
         let dietDb = await Diet.findAll();
-        res.status(200).send(dietDb);
+        if (dietDb.length) {
+            res.status(200).send(dietDb);
+        } else {
+            res.status(404).send('Diet not found');
+        }
     } catch (error) {
         next(error);
     }
