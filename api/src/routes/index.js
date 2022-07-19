@@ -59,12 +59,14 @@ router.get('/recipes/:id', async (req, res, next) => {
     }
 });
 
-router.get('/diets', async (req, res, next) => { //FIXME traer todos los tipos de dietas
+router.get('/diets', async (req, res, next) => { //FIXME 
     try {
-        const diets = await Diet.findAll();
-        diets.length ?
-            res.send(diets) :
-            res.send('error al traer dietas');
+        const diets = await Diet.findAll({});
+        if (diets.length) {
+            res.status(200).json(diets);
+        } else {
+            res.status(404).send('Error when trying to get diets');
+        }
     } catch (e) {
         next(e)
     }
